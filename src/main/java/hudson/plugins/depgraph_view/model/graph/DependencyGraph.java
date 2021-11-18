@@ -28,7 +28,7 @@ import edu.uci.ics.jung.graph.DirectedSparseMultigraph;
 import edu.uci.ics.jung.graph.Graph;
 import hudson.plugins.depgraph_view.model.graph.edge.Edge;
 
-import org.apache.commons.collections15.Predicate;
+import com.google.common.base.Predicate;
 
 import java.util.Collection;
 import java.util.Set;
@@ -79,10 +79,10 @@ public class DependencyGraph {
     public Collection<ProjectNode> getIsolatedNodes() {
         return new VertexPredicateFilter<ProjectNode, Edge>(new Predicate<ProjectNode>() {
             @Override
-            public boolean evaluate(ProjectNode projectNode) {
+            public boolean apply(ProjectNode projectNode) {
                 return graph.degree(projectNode) == 0;
             }
-        }).transform(graph).getVertices();
+        }).apply(graph).getVertices();
     }
 
     public Graph<ProjectNode, Edge> getGraph() {
