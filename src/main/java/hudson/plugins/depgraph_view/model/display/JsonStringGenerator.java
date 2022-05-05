@@ -75,7 +75,7 @@ public class JsonStringGenerator extends AbstractGraphStringGenerator {
         }
 
         // a cluster is a group of jobs having at least one connection to each other through edges
-        List<Set<ProjectNode>> clusters = newArrayList(new WeakComponentClusterer<ProjectNode, Edge>().transform(graph.getGraph()));
+        List<Set<ProjectNode>> clusters = newArrayList(new WeakComponentClusterer<ProjectNode, Edge>().apply(graph.getGraph()));
         Collections.sort(clusters, natural().onResultOf(new Function<Set<ProjectNode>, Integer>() {
             @Override
             public Integer apply(Set<ProjectNode> input) {
@@ -102,7 +102,7 @@ public class JsonStringGenerator extends AbstractGraphStringGenerator {
             double minY = 800;
             double maxY = 0;
             for (ProjectNode node : subgraph.getVertices()) {
-                Point2D point = layout.transform(node);
+                Point2D point = layout.apply(node);
                 if (point.getX() > maxX) {
                     maxX = point.getX();
                 }
@@ -118,7 +118,7 @@ public class JsonStringGenerator extends AbstractGraphStringGenerator {
             }
 
             for (ProjectNode node : subgraph.getVertices()) {
-                Point2D point = layout.transform(node);
+                Point2D point = layout.apply(node);
                 nodeList.add(
                         point2Json(point.getX() - minX, point.getY() - minY, node));
             }

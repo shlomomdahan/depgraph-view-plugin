@@ -26,29 +26,32 @@
     <parent>
         <groupId>org.jenkins-ci.plugins</groupId>
         <artifactId>plugin</artifactId>
-        <version>3.43</version>
+        <version>4.31</version>
         <relativePath />
     </parent>
     <properties>
+        <revision>1.0.6</revision>
+        <changelist>-SNAPSHOT</changelist>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <jenkins.version>2.100</jenkins.version>
+        <jenkins.version>2.321</jenkins.version>
         <java.level>8</java.level>
+        <gitHubRepo>jenkinsci/${project.artifactId}-plugin</gitHubRepo>
     </properties>
     <groupId>org.jenkins-ci.plugins</groupId>
     <artifactId>depgraph-view</artifactId>
     <packaging>hpi</packaging>
 
     <name>Dependency Graph Viewer Plugin</name>
-    <version>1.0.6-SNAPSHOT</version>
+    <version>${revision}${changelist}</version>
     <licenses>
       <license>
         <name>The MIT license</name>
-        <url>http://www.opensource.org/licenses/mit-license.php</url>
+        <url>https://opensource.org/licenses/MIT</url>
         <distribution>repo</distribution>
       </license>
     </licenses>
-    <url>https://github.com/jenkinsci/depgraph-view-plugin</url>
+    <url>https://github.com/jenkinsci/${project.artifactId}-plugin</url>
     <developers>
       <developer>
         <id>wolfs</id>
@@ -60,17 +63,29 @@
       </developer>
     </developers>
 
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>io.jenkins.tools.bom</groupId>
+                <artifactId>bom-2.319.x</artifactId>
+                <version>1013.vf8058992a042</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
     <dependencies>
         <dependency>
             <groupId>org.jenkins-ci.plugins</groupId>
             <artifactId>copyartifact</artifactId>
-            <version>1.37</version>
+            <version>1.46.2</version>
             <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>org.jenkins-ci.plugins</groupId>
             <artifactId>parameterized-trigger</artifactId>
-            <version>2.17</version>
+            <version>2.32</version>
             <optional>true</optional>
         </dependency>
         <dependency>
@@ -82,71 +97,55 @@
         <dependency>
             <groupId>org.jenkins-ci.plugins.workflow</groupId>
             <artifactId>workflow-multibranch</artifactId>
-            <version>2.18</version>
             <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <version>24.1.1-jre</version>
         </dependency>
         <dependency>
             <groupId>net.sf.jung</groupId>
             <artifactId>jung-graph-impl</artifactId>
-            <version>2.0.1</version>
+            <version>2.1.1</version>
         </dependency>
         <dependency>
             <groupId>net.sf.jung</groupId>
             <artifactId>jung-algorithms</artifactId>
-            <version>2.0.1</version>
-        </dependency>
-        <dependency>
-            <groupId>com.google.inject.extensions</groupId>
-            <artifactId>guice-multibindings</artifactId>
-            <version>4.0</version>
+            <version>2.1.1</version>
         </dependency>
         <dependency>
           <groupId>org.jenkins-ci.plugins.workflow</groupId>
           <artifactId>workflow-step-api</artifactId>
-          <version>2.18</version>
         </dependency>
         <dependency>
           <groupId>org.jenkins-ci.plugins</groupId>
           <artifactId>pipeline-maven</artifactId>
-          <version>3.5.6</version>
+          <version>3.10.0</version>
           <optional>true</optional>
         </dependency>
         <dependency>
           <groupId>org.jenkins-ci.plugins</groupId>
           <artifactId>pipeline-build-step</artifactId>
-          <version>2.7</version>
           <optional>true</optional>
         </dependency>
         <dependency>
           <groupId>org.jenkins-ci.plugins</groupId>
           <artifactId>structs</artifactId>
-          <version>1.13</version>
           <optional>true</optional>
         </dependency>
         <dependency>
           <groupId>org.jenkins-ci.plugins</groupId>
           <artifactId>matrix-project</artifactId>
-          <version>1.8</version>
           <optional>true</optional>
         </dependency>
         <dependency>
           <groupId>org.jenkins-ci.plugins</groupId>
           <artifactId>junit</artifactId>
-          <version>1.23</version>
           <scope>test</scope>
         </dependency>
     </dependencies>
 
     <scm>
-        <connection>scm:git:git://github.com/jenkinsci/depgraph-view-plugin.git</connection>
-        <developerConnection>scm:git:git@github.com:jenkinsci/depgraph-view-plugin.git</developerConnection>
-        <url>http://github.com/jenkinsci/depgraph-view-plugin</url>
-      <tag>HEAD</tag>
+        <connection>scm:git:https://github.com/${gitHubRepo}</connection>
+        <developerConnection>scm:git:https://github.com/${gitHubRepo}</developerConnection>
+        <url>https://github.com/${gitHubRepo}</url>
+        <tag>${scmTag}</tag>
   </scm>
 
     <repositories>
